@@ -9,20 +9,31 @@
     VerticalOptions="Center" 
     HorizontalOptions="Center" />
         <Button 
+            x:Name="ProfileButton"
         Text="Profile"
         VerticalOptions="Center" 
-        HorizontalOptions="Center"/>
+        HorizontalOptions="Center"
+            Clicked="ProfileButton_Clicked"/>
+        
         <Button 
+            x:Name="FeedButton"
         Text="Feed"
         VerticalOptions="Center" 
-        HorizontalOptions="Center"/>
+        HorizontalOptions="Center"
+            Clicked="FeedButton_Clicked"
+            />
         <Button 
+            x:Name="AssignmentsButton"
         Text="Assignments"
         VerticalOptions="Center" 
-        HorizontalOptions="Center" />
+        HorizontalOptions="Center"
+            Clicked="AssignmentsButton_Clicked"/>
         <Button 
+            x:Name="MakePhotoButton"
         Text="Make Photo"
         VerticalOptions="Center" 
-        HorizontalOptions="Center"/>
+        HorizontalOptions="Center"
+            Clicked="MakePhotoButton_Clicked"
+            />
     </VerticalStackLayout>
 </ContentPage>
