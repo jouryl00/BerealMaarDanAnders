@@ -14,7 +14,8 @@ public partial class HomePage : ContentPage
        private void AssignmentsButton_Clicked(object sender, EventArgs e)
     {
 
-       
+        Navigation.PushAsync(new AssignmentsPage(LocalDbTut));
+
 
     }
 
