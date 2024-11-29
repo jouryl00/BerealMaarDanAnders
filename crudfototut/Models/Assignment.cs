@@ -18,5 +18,8 @@ namespace crudfototut.Models
         [Column("theme")]
         public string Theme { get; set; }
 
+        //thema class
+        //beordeling class
+
     }
 }

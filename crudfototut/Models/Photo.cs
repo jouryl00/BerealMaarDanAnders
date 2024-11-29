@@ -7,6 +7,15 @@ using SQLite;
 
 namespace crudfototut.Models
 {
+    //HOW TO MAKE FOREIGN KEYS?
+    //VIEWMODELS MVVM?
+    //METHODES IN MODEL?
+    
+    //hOE FOTO MAKEN  
+
+
+    //user geeft de informatie mee voor de foto
+    //maak foto van (cuurent user) voor (current assignment)
     [Table("photos")]
     public class Photo
     {
@@ -21,6 +30,9 @@ namespace crudfototut.Models
         public string PhotoURL { get; set; }
         [Column("timestamp")]
         public DateTime Timestamp { get; set; }
+        [Column("comments")]
+        public string Comments { get; set; }
+
 
     }
 }
