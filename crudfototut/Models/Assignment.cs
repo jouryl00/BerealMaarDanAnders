@@ -17,9 +17,9 @@ namespace crudfototut.Models
         public string Description { get; set; }
         [Column("theme")]
         public string Theme { get; set; }
+        [Column("theme_id")]
+        public string ThemeId { get; set; }
 
-        //thema class
-        //beordeling class
 
     }
 }
