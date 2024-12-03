@@ -10,12 +10,11 @@ namespace crudfototut.Models
     //HOW TO MAKE FOREIGN KEYS?
     //VIEWMODELS MVVM?
     //METHODES IN MODEL?
-    
     //hOE FOTO MAKEN  
-
-
     //user geeft de informatie mee voor de foto
     //maak foto van (cuurent user) voor (current assignment)
+    //ergens anders opslaan dan in librbaby
+    //multipliciteit omdraaien
     [Table("photos")]
     public class Photo
     {
