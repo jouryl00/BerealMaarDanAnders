@@ -1,4 +1,6 @@
+using SQLite;
 namespace crudfototut.Views;
+
 
 public partial class AssignmentsPage : ContentPage
 {
@@ -8,25 +10,46 @@ public partial class AssignmentsPage : ContentPage
 	{
 		InitializeComponent();
         _localDbTut = localDbTut;
+
+        Task.Run(async () =>
+        {
+            var themes = await _localDbTut.GetThemesAsync();
+            ThemePicker.ItemsSource = themes;
+        });
+
         Task.Run(async () => ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync());
     }
 
     private async void CreateButton_Clicked(object sender, EventArgs e)
     {
+        var selectedTheme = ThemePicker.SelectedItem as Models.Theme;
+        if (selectedTheme == null)
+        {
+            await DisplayAlert("Error", "Please select a theme", "OK");
+            return;
+        }
         if (_editAssignmentId == 0)
         {
             //add assignment
-            await _localDbTut.Create(new Models.Assignment
-            { Description = DescriptionEntry.Text, Theme = ThemeEntry.Text });
+            await _localDbTut.Create(new Models.Assignment 
+            {
+                Description = DescriptionEntry.Text, 
+                ThemeId = selectedTheme.Id
+            }); 
         }
         else
         {                 //update assignment
             await _localDbTut.Update(new Models.Assignment
-            { Id = _editAssignmentId, Description = DescriptionEntry.Text, Theme = ThemeEntry.Text });
+            { 
+                Id = _editAssignmentId, 
+                Description = DescriptionEntry.Text,
+                ThemeId = selectedTheme.Id
+
+            }); 
             _editAssignmentId = 0;
         }
         DescriptionEntry.Text = string.Empty;
-        ThemeEntry.Text = string.Empty;
+        ThemePicker.SelectedItem = null;
         ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync();
 
     }
@@ -40,7 +63,7 @@ public partial class AssignmentsPage : ContentPage
             case "Edit":
                 _editAssignmentId = assignment.Id;
                 DescriptionEntry.Text = assignment.Description;
-                ThemeEntry.Text = assignment.Theme;
+                ThemePicker.SelectedItem = (await _localDbTut.GetThemesAsync()).FirstOrDefault(t => t.Id == assignment.ThemeId);
                 break;
             case "Delete":
                 await _localDbTut.Delete(assignment);
@@ -48,9 +71,8 @@ public partial class AssignmentsPage : ContentPage
 
                 break;
         }
-        DescriptionEntry.Text = assignment.Description;
-        ThemeEntry.Text = assignment.Theme;
-        _editAssignmentId = assignment.Id;
+        //DescriptionEntry.Text = assignment.Description;
+        //_editAssignmentId = assignment.Id;
 
     }
 }

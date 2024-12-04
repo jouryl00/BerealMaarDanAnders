@@ -23,8 +23,12 @@ namespace crudfototut.Models
         public int Id { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
+        [Ignore]
+        public User User { get; set; }
         [Column("assignment_id")]
         public int AssignmentId { get; set; }
+        [Ignore]
+        public Assignment Assignment { get; set; }
         [Column("photo_url")]
         public string PhotoURL { get; set; }
         [Column("timestamp")]

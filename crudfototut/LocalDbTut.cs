@@ -19,6 +19,12 @@ namespace crudfototut
             _connection.CreateTableAsync<Models.Assignment>().Wait();
             _connection.CreateTableAsync<Models.User>().Wait();
             _connection.CreateTableAsync<Models.Theme>().Wait();
+            _connection.CreateTableAsync<Models.Photo>().Wait();
+            _connection.CreateTableAsync<Models.PhotoRating>().Wait();
+        }
+        public async Task<List<Models.Theme>> GetThemesAsync()
+        {
+            return await _connection.Table<Models.Theme>().ToListAsync();
         }
 
         //ASSIGNMENT TASKS
@@ -27,10 +33,10 @@ namespace crudfototut
             return await _connection.Table<Models.Assignment>().ToListAsync();
         }
         //deze nog uitzoeken hoe en wat
-        public async Task<Assignment> GetAssignmentByThemeAsync(int themeId)
-        {
-            return await _connection.Table<Models.Assignment>().Where(a => a.ThemeId == themeId).FirstOrDefaultAsync();
-        }
+        //public async Task<Assignment> GetAssignmentByThemeAsync(int themeId)
+        //{
+        //    return await _connection.Table<Models.Assignment>().Where(a => a.ThemeId == themeId).FirstOrDefaultAsync();
+        //}
         public async Task Create(Assignment assignment)
         {
             await _connection.InsertAsync(assignment);

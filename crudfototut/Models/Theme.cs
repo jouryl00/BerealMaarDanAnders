@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SQLite;
 
 namespace crudfototut.Models
@@ -20,8 +21,14 @@ namespace crudfototut.Models
         public string Name { get; set; }
         [Column("assignments")]
         //klopt dit?!?
+        [Ignore]
         public List<Assignment> Assignments { get; set; }
 
-
+        public string AssignmentJson
+        {
+            get => JsonConvert.SerializeObject(Assignments);
+            set => Assignments = JsonConvert.DeserializeObject<List<Assignment>>(value);
+        }
+        
     }
 }
