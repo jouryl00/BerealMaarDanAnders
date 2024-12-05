@@ -24,6 +24,7 @@ namespace crudfototut.Models
         [Ignore]
         public List<Assignment> Assignments { get; set; }
 
+        //List to Json converter want SQLite is kak
         public string AssignmentJson
         {
             get => JsonConvert.SerializeObject(Assignments);

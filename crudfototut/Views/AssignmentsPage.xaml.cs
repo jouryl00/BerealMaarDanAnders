@@ -14,10 +14,25 @@ public partial class AssignmentsPage : ContentPage
         Task.Run(async () =>
         {
             var themes = await _localDbTut.GetThemesAsync();
-            ThemePicker.ItemsSource = themes;
+            if (themes.Count == 0)
+            {
+                var initialThemes = new List<Models.Theme>
+                {
+                    new Models.Theme { Name = "Nature" },
+                    new Models.Theme { Name = "You" },
+                    new Models.Theme { Name = "other" },
+
+
+
+                };
+                await _localDbTut.InsertThemeAsync(initialThemes);
+
+            }
+            ThemePicker.ItemsSource = await _localDbTut.GetThemesAsync();
         });
 
-        Task.Run(async () => ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync());
+
+            Task.Run(async () => ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync());
     }
 
     private async void CreateButton_Clicked(object sender, EventArgs e)
