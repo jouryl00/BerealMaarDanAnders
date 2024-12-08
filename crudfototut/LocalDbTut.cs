@@ -18,6 +18,21 @@ namespace crudfototut
             _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
             _connection.CreateTableAsync<Models.Assignment>().Wait();
             _connection.CreateTableAsync<Models.User>().Wait();
+            _connection.CreateTableAsync<Models.Theme>().Wait();
+            _connection.CreateTableAsync<Models.Photo>().Wait();
+            _connection.CreateTableAsync<Models.PhotoRating>().Wait();
+        }
+        //THEME TASKS
+        public async Task<List<Models.Theme>> GetThemesAsync()
+        {
+            return await _connection.Table<Models.Theme>().ToListAsync();
+        }
+        public async Task InsertThemeAsync(List<Theme> themes)
+        {
+            foreach (var theme in themes)
+            {
+                await _connection.InsertAsync(theme);
+            }
         }
 
         //ASSIGNMENT TASKS
@@ -25,11 +40,7 @@ namespace crudfototut
         {
             return await _connection.Table<Models.Assignment>().ToListAsync();
         }
-        //deze nog uitzoeken hoe en wat
-        public async Task<Assignment> GetAssignmentByThemeAsync(string theme)
-        {
-            return await _connection.Table<Models.Assignment>().Where(a => a.Theme == theme).FirstOrDefaultAsync();
-        }
+        
         public async Task Create(Assignment assignment)
         {
             await _connection.InsertAsync(assignment);

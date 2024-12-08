@@ -15,10 +15,12 @@ namespace crudfototut.Models
         public int Id { get; set; }
         [Column("description")]
         public string Description { get; set; }
-        [Column("theme")]
-        public string Theme { get; set; }
+        //[Column("theme")]
+        //public string Theme { get; set; }
         [Column("theme_id")]
-        public string ThemeId { get; set; }
+        public int ThemeId { get; set; }
+        [Ignore]
+        public Theme Theme { get; set; }
 
 
     }

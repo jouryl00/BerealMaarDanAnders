@@ -5,9 +5,12 @@
              Title="AssignmentsPage">
     <FlexLayout Direction="Column">
         <VerticalStackLayout>
+            <Label Text="Assignment description"/>
             <Entry x:Name="DescriptionEntry" Placeholder="Description..."/>
-            <Entry x:Name="ThemeEntry" Placeholder="Theme..."/>
-            <Button x:Name="CreateButton" Text="Create" Clicked="CreateButton_Clicked"/>
+            <Label Text="Select a theme"/>
+            <Picker x:Name="ThemePicker" Title="Choose a theme" ItemDisplayBinding="{Binding Name}"/>
+
+            <Button x:Name="CreateButton" Text="Create assignment" Clicked="CreateButton_Clicked"/>
         </VerticalStackLayout>
         <ListView x:Name="ListviewAssignments" HasUnevenRows="True" ItemTapped="ListviewAssignment_ItemTapped">
             <ListView.ItemTemplate>
@@ -15,7 +18,6 @@
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding Description}" />
-                            <Label Text="{Binding Theme}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
