@@ -21,8 +21,7 @@ public partial class AssignmentsPage : ContentPage
                     new Models.Theme { Name = "Nature" },
                     new Models.Theme { Name = "You" },
                     new Models.Theme { Name = "other" },
-
-
+                    //Update themes for final app
 
                 };
                 await _localDbTut.InsertThemeAsync(initialThemes);
@@ -33,6 +32,13 @@ public partial class AssignmentsPage : ContentPage
 
 
             Task.Run(async () => ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync());
+    }
+    private async Task LoadAssignmentsAsync()
+    {
+        //await _localDbTut.GetAssignmentsAsync(); 
+        //ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync();
+        var assignments = await _localDbTut.GetAssignmentsAsync();
+        ListviewAssignments.ItemsSource = assignments;
     }
 
     private async void CreateButton_Clicked(object sender, EventArgs e)
@@ -65,7 +71,8 @@ public partial class AssignmentsPage : ContentPage
         }
         DescriptionEntry.Text = string.Empty;
         ThemePicker.SelectedItem = null;
-        ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync();
+        await LoadAssignmentsAsync();
+        
 
     }
 
@@ -83,6 +90,7 @@ public partial class AssignmentsPage : ContentPage
             case "Delete":
                 await _localDbTut.Delete(assignment);
                 ListviewAssignments.ItemsSource = await _localDbTut.GetAssignmentsAsync();
+                await LoadAssignmentsAsync();
 
                 break;
         }

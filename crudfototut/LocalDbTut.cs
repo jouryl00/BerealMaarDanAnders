@@ -34,11 +34,20 @@ namespace crudfototut
                 await _connection.InsertAsync(theme);
             }
         }
+        public async Task<Theme> GetThemeByIdAsync(int id)
+        {
+            return await _connection.Table<Theme>().FirstOrDefaultAsync(t => t.Id == id);
+        }
 
         //ASSIGNMENT TASKS
         public async Task<List<Models.Assignment>> GetAssignmentsAsync()
         {
-            return await _connection.Table<Models.Assignment>().ToListAsync();
+            var assignments = await _connection.Table<Assignment>().ToListAsync();
+            foreach (var assignment in assignments)
+            {
+                assignment.Theme = await GetThemeByIdAsync(assignment.ThemeId);
+            }
+            return assignments;
         }
         
         public async Task Create(Assignment assignment)

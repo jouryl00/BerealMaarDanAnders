@@ -7,7 +7,6 @@
         <VerticalStackLayout>
             <Label Text="Assignment description"/>
             <Entry x:Name="DescriptionEntry" Placeholder="Description..."/>
-            <Label Text="Select a theme"/>
             <Picker x:Name="ThemePicker" Title="Choose a theme" ItemDisplayBinding="{Binding Name}"/>
 
             <Button x:Name="CreateButton" Text="Create assignment" Clicked="CreateButton_Clicked"/>
@@ -18,6 +17,7 @@
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding Description}" />
+                            <Label Text="{Binding Theme.Name}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
